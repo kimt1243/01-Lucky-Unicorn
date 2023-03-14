@@ -1,5 +1,10 @@
-import random
+Greet = "hello world"
+stars = "*" * 3
 
-for item in range (0, 100):
-    number = random.randint(0, 4)
-    print(number, end="\t")
+Greeting = "{} {} {}".format(stars, Greet, stars)
+
+Star_length = "*" * len(Greeting)
+
+print(Star_length)
+print(Greeting)
+print(Star_length)

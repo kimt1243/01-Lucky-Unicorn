@@ -1,7 +1,21 @@
 import random
 
 
+def statement_generator(statement, decoration, side_text):
+
+    sides = decoration * 3
+    greeting = "{} {} {}".format(sides, statement, sides)
+
+    sides_length = side_text * len(greeting)
+
+    print(sides_length)
+    print(greeting)
+    print(sides_length)
+
+    return ""
 # Functions go here...
+
+
 def yes_no(question):
     valid = False
     while not valid:
@@ -18,10 +32,26 @@ def yes_no(question):
 
 
 def instructions():
-    print("**** How to play ****")
     print()
-    print("The rules of the game go here")
+    statement_generator("How to play", "*", "*")
     print()
+    print("Choose a starting amount (minimum $1, maximum $10). ")
+    print()
+    print("Then press <enter> to play. "
+          "You will get either a horse, a zebra, a donkey or a unicorn.")
+    print()
+    print("It costs $1 per round. Depending on your prize you might win some "
+          "of the money back. Here's the payout amounts...")
+    print("Unicorn: $5.00 (balance increases by $4)")
+    print("Horse: $0.50 (balance decreases by $0.50)")
+    print("Zebra: $0.50 (balance decreases by $0.50)")
+    print("Donkey: $0.50 (balance decreases by $0.50)")
+    print()
+    print("Can you avoid the donkeys, get the unicorns and walk home with the money?")
+    print()
+    print("Hint: To quit while playing the game, type 'xxx' instead of pressing <enter>")
+    print()
+    statement_generator("Let's get Started", "=", "*")
     return ""
 
 
@@ -45,6 +75,9 @@ def num_check(question, low, high):
 
 
 # Main Routine goes here...
+
+statement_generator("Welcome to Lucky Unicorn", "*", "=")
+print()
 played_before = yes_no("Have you played the game before? ")
 
 if played_before == "no":
@@ -68,7 +101,7 @@ while play_again == "":
     rounds_played += 1
 
     # Print round number
-    print("*** Round #{} ***".format(rounds_played))
+    statement_generator("*** Round #{} ***".format(rounds_played), "#", "=")
 
     chosen_num = random.randint(1, 100)
 
@@ -76,25 +109,30 @@ while play_again == "":
     if 1 <= chosen_num <= 5:
         chosen = "unicorn"
         balance += 4
+        decoration = "#"
     elif 6 <= chosen_num <= 36:
         chosen = "donkey"
+        decoration = "="
         balance -= 1
     else:
         if chosen_num % 2 == 0:
             chosen = "horse"
         else:
             chosen = "zebra"
+            decoration = "*"
         balance -= 0.5
-
-    print("You got a {}.  Your balance is ${:.2f}". format(chosen, balance))
+    print()
+    statement_generator("You got a {}.  Your balance is ${:.2f}".
+                        format(chosen, balance), decoration, decoration)
 
     if balance < 1:
         play_again = "xxx"
-        print("Sorry you have run out of money")
+        print("Sorry you have run out of money...")
     else:
         play_again = input("Press Enter to play again or 'xxx' to quit")
     print()
 if play_again == 'xxx':
-    print()
-    print("Final balance", balance)
+    statement_generator("Results", "=", "=")
+    print("Final balance ${} ".format(balance))
+    print("Thank you for playing Lucky Unicorn!")
 
